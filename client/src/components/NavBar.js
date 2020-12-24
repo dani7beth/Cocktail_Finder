@@ -36,8 +36,8 @@ export default (props) => {
       <Link to="/">
         <Menu.Item>Home</Menu.Item>
       </Link>
-      <Link to="/things">
-        <Menu.Item>Things</Menu.Item>
+      <Link to="/cocktails">
+        <Menu.Item>Cocktails</Menu.Item>
       </Link>
       <Menu.Menu position="right">{rightNavItems()}</Menu.Menu>
     </Menu>
