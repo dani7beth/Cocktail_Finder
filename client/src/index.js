@@ -7,14 +7,17 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./providers/AuthProvider";
 import "semantic-ui-css/semantic.min.css";
 import { initMiddleware } from "devise-axios";
+import { CocktailProvider } from "./providers/CocktailProvider";
 
 initMiddleware();
 
 ReactDOM.render(
   <AuthProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CocktailProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </CocktailProvider>
   </AuthProvider>,
   document.getElementById("root")
 );

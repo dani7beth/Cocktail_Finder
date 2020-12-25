@@ -78,16 +78,6 @@ Cocktail.create(
     timing: ""
 )
 Cocktail.create(
-    name: "Brandy Crusta",
-    served: "up",
-    garnish: "Orange or Lemon Twist",
-    drinkware: "Cocktail",
-    ingredients: "52.5 ml brandy, 7.5 ml Maraschino Luxardo, 1 barspoon Curaçao, 15 ml fresh lemon juice, 1 barspoon simple syrup, 2 dashes aromatic bitters",
-    instructions: "Mix all ingredients with ice cubes in a mixing glass. Strain into slim cocktail glass rimmed with sugar.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/15-09-26-RalfR-WLC-0306.jpg/440px-15-09-26-RalfR-WLC-0306.jpg",
-    timing: ""
-)
-Cocktail.create(
     name: "Casino",
     served: "Straight up; without ice",
     garnish: "Lemon twist and maraschino cherry",
@@ -458,3 +448,4 @@ Cocktail.create(
     timing: ""
 )
 
+puts "DB Seeded"

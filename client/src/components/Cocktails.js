@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Header, Card, Image } from "semantic-ui-react";
-import Axios from "axios";
 import { Link } from "react-router-dom";
+import { CocktailContext } from "../providers/CocktailProvider";
 
 const Cocktails = () => {
   //grabbing cocktails using use state and use effect
-  const [cocktails, setCocktails] = useState([]);
-
-  useEffect(() => {
-    Axios.get("/api/cocktails").then((res) => {
-      setCocktails(res.data);
-    });
-  }, []);
+  const {cocktails} = useContext(CocktailContext);
+  console.log(cocktails);
 
   const renderCocktails = () => {
     return cocktails.map((c) => (
