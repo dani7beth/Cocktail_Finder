@@ -6,7 +6,11 @@ import { CocktailContext } from "../providers/CocktailProvider";
 const Cocktails = () => {
   //grabbing cocktails using use state and use effect
   const {cocktails} = useContext(CocktailContext);
-  console.log(cocktails);
+  
+  let filteredCocktails = cocktails.filter(c =>{
+    return c.ingredients.includes('rum');
+  })
+  console.log(filteredCocktails);
 
   const renderCocktails = () => {
     return cocktails.map((c) => (
