@@ -7,15 +7,10 @@ const Cocktails = () => {
   //grabbing cocktails using use state and use effect
   const { cocktails } = useContext(CocktailContext);
 
-  // logic to filter the cocktails given ingredient
-  // let filteredCocktails = cocktails.filter((c) => {
-  //   return c.ingredients.toLowerCase().includes("abc".toLowerCase());
-  // });
-  // console.log(filteredCocktails);
+  
 
   const renderCocktails = () => {
-    // if (filteredCocktails.length === 0)
-    //   return "Sorry no cocktails match those ingredients";
+   
     return cocktails.map((c) => (
       <Card key={c.id}>
         <Image src={c.image} height="250px" />
