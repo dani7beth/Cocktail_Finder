@@ -24,6 +24,8 @@ export default (props) => {
       drinkware,
       ingredients,
       instructions,
+      image, 
+      timing
     });
     props.history.push("/");
   };
