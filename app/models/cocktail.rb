@@ -1,6 +1,6 @@
 class Cocktail < ApplicationRecord
   include PgSearch
-  pg_search_scope :search_by_term, against: :ingredients,
+  pg_search_scope :search_by_term, against: [:ingredients, :name],
     using: {
       tsearch: {
         any_word: true,

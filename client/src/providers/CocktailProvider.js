@@ -6,8 +6,7 @@ export const CocktailContext = React.createContext();
 export const CocktailConsumer = CocktailContext.Consumer;
 
 export class CocktailProvider extends React.Component {
-  state = { cocktails: null, filterCocktails: (x) => this.filterCocktails(x) };
-  
+  state = { cocktails: null, filterCocktails: (x) => this.filterCocktails(x), handleCocktailCreate: (x) => this.handleCocktailCreate(x)};
 
   componentDidMount = () => {
     Axios.get("/api/cocktails")
@@ -21,14 +20,24 @@ export class CocktailProvider extends React.Component {
 
   //handle search query
   filterCocktails = (query) => {
-    Axios.get('/api/cocktails/search', {params: {query}})
-    .then((res)=>{
-      console.log(res.data);
-      this.setState({cocktails: res.data});
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
+    Axios.get("/api/cocktails/search", { params: { query } })
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ cocktails: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  handleCocktailCreate = (cocktail) => {
+    Axios.post("/api/cocktails", cocktail)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {

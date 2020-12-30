@@ -10,6 +10,7 @@ import FetchUser from "./components/FetchUser";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Cocktails from "./components/Cocktails";
 import Cocktail from "./components/Cocktail";
+import CocktailForm from "./components/CocktailForm";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Route exact path='/cocktails' component={Cocktails} />
             <Route exact path='/cocktails/:id' component={Cocktail} />
+            <ProtectedRoute exact path='/create' component={CocktailForm} />
             <Route component={NoMatch} />
           </Switch>
         </Container>
