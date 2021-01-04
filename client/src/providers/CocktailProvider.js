@@ -16,13 +16,13 @@ export class CocktailProvider extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+    
   };
 
   //handle search query
   filterCocktails = (query) => {
     Axios.get("/api/cocktails/search", { params: { query } })
       .then((res) => {
-        console.log(res.data);
         this.setState({ cocktails: res.data });
       })
       .catch((err) => {

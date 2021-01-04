@@ -8,15 +8,18 @@ import { AuthProvider } from "./providers/AuthProvider";
 import "semantic-ui-css/semantic.min.css";
 import { initMiddleware } from "devise-axios";
 import { CocktailProvider } from "./providers/CocktailProvider";
+import { ReviewContext, ReviewProvider } from "./providers/ReviewProvider";
 
 initMiddleware();
 
 ReactDOM.render(
   <AuthProvider>
     <CocktailProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ReviewProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ReviewProvider>
     </CocktailProvider>
   </AuthProvider>,
   document.getElementById("root")
