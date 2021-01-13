@@ -1,5 +1,5 @@
 class Api::CocktailsController < ApplicationController
-
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
   #render json of all the cocktails
   def index
     render json: Cocktail.all
@@ -21,7 +21,20 @@ class Api::CocktailsController < ApplicationController
     end
   end
 
+  def update
+    @cocktail.update(cocktail_params)
+    render json: @cocktail
+  end
+
+  def destroy
+    @cocktail.destroy
+    render json: @cocktail
+  end
+
   private
+  def set_cocktail
+    @cocktail = Cocktail.find(params[:id])
+  end
   def cocktail_params
     params.require(:cocktail).permit(:name, :served, :garnish, :drinkware, :ingredients, :instructions, :image, :timing)
   end

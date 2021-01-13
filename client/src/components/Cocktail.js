@@ -42,7 +42,9 @@ const Cocktail = (props) => {
     if (reviews !== null) {
       return reviews.map((r) => (
         <Card key={r.id}>
-          <Card.Header><Rating defaultRating={r.rating} maxRating={5} disabled/></Card.Header>
+          <Card.Header>
+            <Rating defaultRating={r.rating} maxRating={5} disabled />
+          </Card.Header>
           <Card.Content>{r.comment}</Card.Content>
         </Card>
       ));

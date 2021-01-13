@@ -7,18 +7,17 @@ const Cocktails = () => {
   //grabbing cocktails using use state and use effect
   const { cocktails } = useContext(CocktailContext);
 
-  
-
   const renderCocktails = () => {
-   
-    return cocktails.map((c) => (
-      <Card key={c.id}>
-        <Image src={c.image} height="250px" />
-        <Link to={`/cocktails/${c.id}`}>
-          <Card.Header>{c.name}</Card.Header>
-        </Link>
-      </Card>
-    ));
+    if (cocktails) {
+      return cocktails.map((c) => (
+        <Card key={c.id}>
+          <Image src={c.image} height="250px" />
+          <Link to={`/cocktails/${c.id}`}>
+            <Card.Header>{c.name}</Card.Header>
+          </Link>
+        </Card>
+      ));
+    }
   };
 
   return (
