@@ -6,7 +6,12 @@ export const CocktailContext = React.createContext();
 export const CocktailConsumer = CocktailContext.Consumer;
 
 export class CocktailProvider extends React.Component {
-  state = { cocktails: null, filterCocktails: (x) => this.filterCocktails(x), handleCocktailCreate: (x) => this.handleCocktailCreate(x)};
+  state = {
+    cocktails: null,
+    filterCocktails: (x) => this.filterCocktails(x),
+    handleCocktailCreate: (x) => this.handleCocktailCreate(x),
+    handleCocktailEdit: (x,y) => this.handleCocktailEdit(x,y)
+  };
 
   componentDidMount = () => {
     Axios.get("/api/cocktails")
@@ -16,7 +21,6 @@ export class CocktailProvider extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-    
   };
 
   //handle search query
@@ -39,10 +43,22 @@ export class CocktailProvider extends React.Component {
         console.log(err);
       });
   };
-
+  handleCocktailEdit = async (id, cocktail) => {
+    try{
+      let res = await Axios.put(`/api/cocktails/${id}`, cocktail)
+      console.log(res.data);
+    }catch(err){
+      console.log(err);
+    }
+  }
   render() {
     return (
-      <CocktailContext.Provider value={{ ...this.state }}>
+      <CocktailContext.Provider
+        value={{
+          ...this.state,
+          setCocktail: (cocktail) => this.setState({ cocktail }),
+        }}
+      >
         {this.props.children}
       </CocktailContext.Provider>
     );

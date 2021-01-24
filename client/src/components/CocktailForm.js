@@ -1,33 +1,72 @@
+import Axios from "axios";
 import { useContext, useState } from "react";
-import { Header, Container, Form, Button } from "semantic-ui-react";
+import { Header, Container, Form} from "semantic-ui-react";
 import { CocktailContext } from "../providers/CocktailProvider";
 
-export default (props) => {
+export default ({cocktailProp, addCocktail, editCocktail, handleClose}) => {
+  
+  const {handleCocktailEdit} = useContext(CocktailContext);
   //setting cocktail to a default value
-  const [name, setName] = useState("");
-  const [served, setServed] = useState("");
-  const [garnish, setGarnish] = useState("");
-  const [drinkware, setDrinkware] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [image, setImage] = useState("");
-  const [timing, setTiming] = useState("");
+  
 
-  const { handleCocktailCreate } = useContext(CocktailContext);
+  const [cocktail, setCocktail] = useState(
+    cocktailProp ? {
+      name: cocktailProp.name,
+      served: cocktailProp.served,
+      garnish: cocktailProp.garnish,
+      drinkware: cocktailProp.drinkware,
+      ingredients: cocktailProp.ingredients,
+      instructions: cocktailProp.instructions,
+      image: cocktailProp.image,
+      timing: cocktailProp.timing,
+    } :
+    {
+      name: '',
+      served: '',
+      garnish: '',
+      drinkware: '',
+      ingredients: '',
+      instructions: '',
+      image: '',
+      timing: '',
+    }
+  )
+
+  const addCallCocktail = async () =>{
+   try{
+     let res = await Axios.post(`/api/cocktails`, cocktail);
+     addCocktail(res.data);
+   }catch(err){
+     console.log(err);
+   }
+  }
+
+  const editCallCocktail = () => {
+    handleCocktailEdit(cocktailProp.id, cocktail);
+  }
+
+  const handleChange = (e) =>{
+    setCocktail({...cocktail, [e.target.name]: e.target.value});
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleCocktailCreate({
-      name,
-      served,
-      garnish,
-      drinkware,
-      ingredients,
-      instructions,
-      image, 
-      timing
-    });
-    props.history.push("/");
+    if(cocktailProp){
+      editCallCocktail();
+    }else{
+      addCallCocktail();
+      setCocktail({
+        name: '',
+        served: '',
+        garnish: '',
+        drinkware: '',
+        ingredients: '',
+        image: '',
+        timing: '',
+        
+      });
+    }
+    handleClose();
   };
 
   return (
@@ -41,80 +80,64 @@ export default (props) => {
             label="Name"
             type="text"
             name="name"
-            value={name}
-            onChange={(e, { value }) => {
-              setName(value);
-            }}
+            value={cocktail.name}
+            onChange={handleChange}
             required
           />
           <Form.Input
             label="Served"
             type="text"
             name="served"
-            value={served}
-            onChange={(e, { value }) => {
-              setServed(value);
-            }}
+            value={cocktail.served}
+            onChange={handleChange}
             required
           />
           <Form.Input
             label="Garnish"
             type="text"
             name="garnish"
-            value={garnish}
-            onChange={(e, { value }) => {
-              setGarnish(value);
-            }}
+            value={cocktail.garnish}
+            onChange={handleChange}
           />
           <Form.Input
             label="Drinkware"
             type="text"
             name="drinkware"
-            value={drinkware}
-            onChange={(e, { value }) => {
-              setDrinkware(value);
-            }}
+            value={cocktail.drinkware}
+            onChange={handleChange}
             required
           />
           <Form.Input
             label="Ingredients"
             type="text"
             name="ingredients"
-            value={ingredients}
-            onChange={(e, { value }) => {
-              setIngredients(value);
-            }}
+            value={cocktail.ingredients}
+            onChange={handleChange}
             required
           />
           <Form.Input
             label="Instructions"
             type="text"
             name="instructions"
-            value={instructions}
-            onChange={(e, { value }) => {
-              setInstructions(value);
-            }}
+            value={cocktail.instructions}
+            onChange={handleChange}
             required
           />
           <Form.Input
             label="Image Url"
             type="text"
             name="image"
-            value={image}
-            onChange={(e, { value }) => {
-              setImage(value);
-            }}
+            value={cocktail.image}
+            onChange={handleChange}
           />
           <Form.Input
             label="Timing"
             type="text"
             name="timing"
-            value={timing}
-            onChange={(e, { value }) => {
-              setTiming(value);
-            }}
+            value={cocktail.timing}
+            onChange={handleChange}
           />
-          <Form.Button type="submit">add</Form.Button>
+          <Form.Button type="submit">{cocktailProp ? 'edit' : 'add'}</Form.Button>
         </Form>
       </Container>
     </>

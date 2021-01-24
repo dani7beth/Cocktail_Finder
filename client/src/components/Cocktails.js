@@ -10,12 +10,12 @@ const Cocktails = () => {
   const renderCocktails = () => {
     if (cocktails) {
       return cocktails.map((c) => (
-        <Card key={c.id}>
-          <Image src={c.image} height="250px" />
-          <Link to={`/cocktails/${c.id}`}>
+        <Link to={`/cocktails/${c.id}`}>
+          <Card key={c.id}>
+            <Image src={c.image} height="250px" />
             <Card.Header>{c.name}</Card.Header>
-          </Link>
-        </Card>
+          </Card>
+        </Link>
       ));
     }
   };

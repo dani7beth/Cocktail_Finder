@@ -1,5 +1,6 @@
 class Api::CocktailsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :set_cocktail, only: [:update, :destroy]
   #render json of all the cocktails
   def index
     render json: Cocktail.all

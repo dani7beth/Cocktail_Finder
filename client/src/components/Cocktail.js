@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { Modal, Button } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import {
   Container,
@@ -12,6 +13,7 @@ import {
 } from "semantic-ui-react";
 import { CocktailContext } from "../providers/CocktailProvider";
 import { ReviewContext } from "../providers/ReviewProvider";
+import CocktailForm from "./CocktailForm";
 
 const Cocktail = (props) => {
   const { cocktails } = useContext(CocktailContext);
@@ -19,6 +21,10 @@ const Cocktail = (props) => {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleHide = () => setShow(false);
 
   let cocktail = cocktails.find((c) => {
     return c.id == props.match.params.id;
@@ -78,6 +84,27 @@ const Cocktail = (props) => {
         </List>
         <Header as="h4">Directions</Header>
         <p>{cocktail.instructions}</p>
+        <Button onClick={handleShow}>Edit</Button>
+
+        <Modal
+          show={show}
+          onHide={handleHide}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Modal title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <CocktailForm cocktailProp={cocktail} handleClose={handleHide}/>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleHide}>
+              Cancel
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         <Header as="h4">Reviews</Header>
         <Rating
           icon="star"
