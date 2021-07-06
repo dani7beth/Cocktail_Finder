@@ -10,7 +10,7 @@ export class CocktailProvider extends React.Component {
     cocktails: null,
     filterCocktails: (x) => this.filterCocktails(x),
     handleCocktailCreate: (x) => this.handleCocktailCreate(x),
-    handleCocktailEdit: (x,y) => this.handleCocktailEdit(x,y)
+    handleCocktailEdit: (x, y) => this.handleCocktailEdit(x, y),
   };
 
   componentDidMount = () => {
@@ -34,29 +34,43 @@ export class CocktailProvider extends React.Component {
       });
   };
 
-  handleCocktailCreate = (cocktail) => {
+  handleCocktailCreate = (cocktail, history) => {
     Axios.post("/api/cocktails", cocktail)
       .then((res) => {
         console.log(res.data);
+        history.goBack();
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  handleCocktailEdit = async (id, cocktail) => {
-    try{
-      let res = await Axios.put(`/api/cocktails/${id}`, cocktail)
+  handleCocktailEdit = async (id, cocktail, history) => {
+    try {
+      let res = await Axios.put(`/api/cocktails/${id}`, cocktail);
       console.log(res.data);
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
-  }
+    history.goBack();
+  };
+  handleCocktailDelete = async (id, history) => {
+    try {
+      let res = await Axios.delete(`/api/cocktails/${id}`);
+    } catch (err) {
+      console.log(err);
+    }
+    this.state.cocktails.filter((cocktail) => id !== cocktail.id);
+    history.goBack();
+  };
   render() {
     return (
       <CocktailContext.Provider
         value={{
           ...this.state,
           setCocktail: (cocktail) => this.setState({ cocktail }),
+          handleCocktailDelete: this.handleCocktailDelete,
+          handleCocktailEdit: this.handleCocktailEdit,
+          handleCocktailCreate: this.handleCocktailCreate,
         }}
       >
         {this.props.children}

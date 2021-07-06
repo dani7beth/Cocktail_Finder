@@ -53,6 +53,7 @@ export class AuthProvider extends React.Component {
       <AuthContext.Provider
         value={{
           ...this.state.user,
+          user: this.state.user,
           authenticated: this.state.user !== null,
           handleRegister: this.handleRegister,
           handleLogin: this.handleLogin,

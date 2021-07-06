@@ -6,8 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
+user = User.create(email: 'admin@test.com', password:'123456', name: 'Admin')
 
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Alexander",
     served: "Straight up; without ice",
     garnish: "Nutmeg",
@@ -17,7 +19,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Alexander_Cocktail.png",
     timing: "After dinner"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Americano",
     served: "On the rocks; poured over ice",
     garnish: "Half an orange slice, Lemon twist",
@@ -27,7 +30,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Americano_cocktail_at_Nightwood_Restaurant.jpg/440px-Americano_cocktail_at_Nightwood_Restaurant.jpg",
     timing: "Before dinner"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Angel Face",
     served: "Straight up; without ice",
     garnish: "",
@@ -37,7 +41,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/IBA_Cocktail_Angel_Face_%2828068833805%29.jpg/440px-IBA_Cocktail_Angel_Face_%2828068833805%29.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Aviation",
     served: "Straight up; without ice",
     garnish: "Cherry",
@@ -47,7 +52,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Aviation_Cocktail.jpg/440px-Aviation_Cocktail.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Between the Sheets",
     served: "Straight up; without ice",
     garnish: "",
@@ -57,7 +63,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Between_The_Sheets_Cocktail.jpg/440px-Between_The_Sheets_Cocktail.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Boulevardier",
     served: "On the rocks; poured over ice",
     garnish: "Orange zest",
@@ -67,7 +74,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Society_Lounge_-_Boulevardier_-_16164913902.jpg/440px-Society_Lounge_-_Boulevardier_-_16164913902.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Brandy Crusta",
     served: "up",
     garnish: "Orange or Lemon Twist",
@@ -77,7 +85,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/15-09-26-RalfR-WLC-0306.jpg/440px-15-09-26-RalfR-WLC-0306.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Casino",
     served: "Straight up; without ice",
     garnish: "Lemon twist and maraschino cherry",
@@ -87,7 +96,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Casino_Cocktail_%289120690108%29.jpg/440px-Casino_Cocktail_%289120690108%29.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Clover Club",
     served: "Straight up; without ice",
     garnish: "",
@@ -97,7 +107,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Cloverclub.jpg/440px-Cloverclub.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Daiquiri",
     served: "Straight up; without ice",
     garnish: "",
@@ -107,7 +118,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Classic_Daiquiri_in_Cocktail_Glass.jpg/440px-Classic_Daiquiri_in_Cocktail_Glass.jpg",
     timing: "Happy Hour / Summer drink"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Dry Martini",
     served: "up (or on the rocks)",
     garnish: "Olive or lemon twist",
@@ -117,7 +129,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/15-09-26-RalfR-WLC-0084.jpg/440px-15-09-26-RalfR-WLC-0084.jpg",
     timing: "Before dinner"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Gin fizz",
     served: "On the rocks; poured over ice",
     garnish: "Lemon slice",
@@ -127,7 +140,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/15-09-26-RalfR-WLC-0032.jpg/440px-15-09-26-RalfR-WLC-0032.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Hanky-Panky",
     served: "up",
     garnish: "Orange Zest",
@@ -137,7 +151,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Hanky_Panky_cocktail.jpg/440px-Hanky_Panky_cocktail.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "John Collins",
     served: "On the rocks; poured over ice",
     garnish: "Lemon slice and a maraschino cherry",
@@ -147,7 +162,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/IBA_Cocktail_John_Collins_%2829221732881%29.jpg/440px-IBA_Cocktail_John_Collins_%2829221732881%29.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Last Word",
     served: "Straight up; without ice",
     garnish: "",
@@ -157,7 +173,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/The_Last_Word_cocktail_raised.jpg/440px-The_Last_Word_cocktail_raised.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Manhattan",
     served: "Straight up; without ice",
     garnish: "Maraschino cherry",
@@ -167,7 +184,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Manhattan_Cocktail2.jpg/440px-Manhattan_Cocktail2.jpg",
     timing: "Before dinner"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Martinez",
     served: "up",
     garnish: "Lemon zest",
@@ -177,7 +195,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Martinez_Cocktail.jpg/440px-Martinez_Cocktail.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Mary Pickford",
     served: "Straight up; without ice",
     garnish: "",
@@ -187,7 +206,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Mary_Pickford_Cocktail.jpg/440px-Mary_Pickford_Cocktail.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Monkey Gland",
     served: "Straight up; without ice",
     garnish: "",
@@ -197,7 +217,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Monkey_Gland_%2811677703163%29.jpg/440px-Monkey_Gland_%2811677703163%29.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Negroni",
     served: "On the rocks; poured over ice",
     garnish: "Orange slice",
@@ -207,7 +228,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Negroni_served_in_Vancouver_BC.jpg/440px-Negroni_served_in_Vancouver_BC.jpg",
     timing: "Before dinner"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Old Fashioned",
     served: "On the rocks; poured over ice",
     garnish: "Orange slice or zest, and cocktail cherry",
@@ -217,7 +239,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Whiskey_Old_Fashioned1.jpg/440px-Whiskey_Old_Fashioned1.jpg",
     timing: "Before dinner"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Paradise",
     served: "Straight up; without ice",
     garnish: "",
@@ -227,7 +250,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Paradise_cocktail.jpg/440px-Paradise_cocktail.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Planter's Punch",
     served: "On the rocks; poured over ice",
     garnish: "Orange zest",
@@ -237,7 +261,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Planters_Punch_2.jpg/440px-Planters_Punch_2.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Porto Flip",
     served: "Straight up; without ice",
     garnish: "Grated nutmeg",
@@ -247,7 +272,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Porto_Flip.jpg/440px-Porto_Flip.jpg",
     timing: "After dinner"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Ramos Gin Fizz",
     served: "Straight up; without ice",
     garnish: "",
@@ -257,7 +283,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Ramos_Gin_Fizz.jpg/440px-Ramos_Gin_Fizz.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Rusty Nail",
     served: "On the rocks; poured over ice",
     garnish: "Lemon twist",
@@ -267,7 +294,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Rusty_Nail_a_cocktail_by_%40tokenchick13_%2816503594826%29.jpg/440px-Rusty_Nail_a_cocktail_by_%40tokenchick13_%2816503594826%29.jpg",
     timing: "After dinner",
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Sazerac",
     served: "Straight up; without ice",
     garnish: "Lemon peel",
@@ -277,7 +305,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/SazeracRooseveltNOLA1July2009.JPG/440px-SazeracRooseveltNOLA1July2009.JPG",
     timing: "After dinner"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Sidecar",
     served: "Straight up; without ice",
     garnish: "",
@@ -287,7 +316,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Sidecar-cocktail.jpg/440px-Sidecar-cocktail.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Stinger",
     served: "Straight up; without ice",
     garnish: "",
@@ -297,7 +327,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Stinger_Cocktail.jpg/440px-Stinger_Cocktail.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Tuxedo",
     served: "Straight up; without ice",
     garnish: "Cherry, lemon zest",
@@ -307,7 +338,8 @@ Cocktail.create(
     image: "https://hips.hearstapps.com/esq.h-cdn.co/assets/15/18/1430422708-dmg-tuxedo-cocktail-004.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Vieux Carré",
     served: "Straight up; without ice",
     garnish: "Orange zest and maraschino cherry",
@@ -317,7 +349,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vieux_Carre_Cocktail.jpg/440px-Vieux_Carre_Cocktail.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Whiskey Sour",
     served: "On the rocks or straight up",
     garnish: "Maraschino cherry and a half orange slice",
@@ -327,7 +360,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Whiskey_Sour.jpg/440px-Whiskey_Sour.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "White Lady",
     served: "Straight up; without ice",
     garnish: "",
@@ -337,7 +371,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/White_Lady_-_Beefeater_gin%2C_Cointreau%2C_fresh_lemon_juice_%2812403540403%29.jpg/440px-White_Lady_-_Beefeater_gin%2C_Cointreau%2C_fresh_lemon_juice_%2812403540403%29.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Bellini",
     served: "Straight up; without ice",
     garnish: "",
@@ -347,7 +382,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Bellini_Cipriani%2C_Macaroni_Grill%2C_Dunwoody_GA.jpg/440px-Bellini_Cipriani%2C_Macaroni_Grill%2C_Dunwoody_GA.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Bloody Mary",
     served: "On the rocks; poured over ice",
     garnish: "Celery stalk and lemon wedge",
@@ -357,7 +393,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Bloody_Mary_Coctail_with_celery_stalk_-_Evan_Swigart.jpg/440px-Bloody_Mary_Coctail_with_celery_stalk_-_Evan_Swigart.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Cosmopolitan",
     served: "Straight up; without ice",
     garnish: "Lime slice",
@@ -367,7 +404,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Cosmopolitan_%285076906532%29.jpg/440px-Cosmopolitan_%285076906532%29.jpg",
     timing: "All day"
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Irish Coffee",
     served: "Hot",
     garnish: "",
@@ -377,7 +415,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Irish_coffee_glass.jpg/440px-Irish_coffee_glass.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Long Island Iced Tea",
     served: "On the rocks; poured over ice",
     garnish: "Lemon slice",
@@ -387,7 +426,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Long_Island_Iced_Teas.jpg/440px-Long_Island_Iced_Teas.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Mai Tai",
     served: "On the rocks; poured over ice",
     garnish: "Spearmint leaves and lime shell",
@@ -397,7 +437,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Trader_Vic%27s_1944_Mai_Tai.jpg/440px-Trader_Vic%27s_1944_Mai_Tai.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Margarita",
     served: "On the rocks; poured over ice",
     garnish: "Salt on the rim",
@@ -407,7 +448,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/MargaritaReal.jpg/440px-MargaritaReal.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Mimosa",
     served: "Straight up; without ice",
     garnish: "Orange twist",
@@ -417,7 +459,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Pool-side_Mimosas_at_The_Standard_Hotel.jpg/440px-Pool-side_Mimosas_at_The_Standard_Hotel.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Mojito",
     served: "On the rocks; poured over ice",
     garnish: "Sprig of mint (Yerba buena in the original recipe), slice of lime",
@@ -427,7 +470,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Mojito98775.jpeg/440px-Mojito98775.jpeg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Piña Colada",
     served: "Blended with ice (frozen style)",
     garnish: "Pineapple slice and/or maraschino cherry",
@@ -437,7 +481,8 @@ Cocktail.create(
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Pi%C3%B1a_Colada.jpg/440px-Pi%C3%B1a_Colada.jpg",
     timing: ""
 )
-Cocktail.create(
+user.cocktails.create(
+    user_id: user.id,
     name: "Tequila Sunrise",
     served: "On the rocks; poured over ice",
     garnish: "Orange slice and cherry",

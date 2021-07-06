@@ -14,15 +14,16 @@ import {
 import { CocktailContext } from "../providers/CocktailProvider";
 import { ReviewContext } from "../providers/ReviewProvider";
 import CocktailForm from "./CocktailForm";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Cocktail = (props) => {
-  const { cocktails } = useContext(CocktailContext);
+  const { cocktails, handleCocktailDelete } = useContext(CocktailContext);
   const { createReviews } = useContext(ReviewContext);
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [show, setShow] = useState(false);
-
+  const { user } = useContext(AuthContext);
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
 
@@ -68,6 +69,10 @@ const Cocktail = (props) => {
     window.location.reload();
   };
 
+  const handleDelete = () => {
+    handleCocktailDelete(cocktail.id, props.history);
+  };
+
   return (
     <>
       <Container>
@@ -84,7 +89,12 @@ const Cocktail = (props) => {
         </List>
         <Header as="h4">Directions</Header>
         <p>{cocktail.instructions}</p>
-        <Button onClick={handleShow}>Edit</Button>
+        {user.id === cocktail.user_id && (
+          <>
+            <Button onClick={handleShow}>Edit</Button>
+            <Button onClick={handleDelete}>Delete</Button>
+          </>
+        )}
 
         <Modal
           show={show}
@@ -96,7 +106,7 @@ const Cocktail = (props) => {
             <Modal.Title>Modal title</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <CocktailForm cocktailProp={cocktail} handleClose={handleHide}/>
+            <CocktailForm cocktailProp={cocktail} handleClose={handleHide} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleHide}>

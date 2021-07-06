@@ -8,13 +8,12 @@ class Api::CocktailsController < ApplicationController
 
   #search function
   def search
-    @cocktails = Cocktail.search_by_term(params[:query])
-
+    @cocktails = Cocktail.search(params[:query])
     render json: @cocktails
   end
 
   def create
-    cocktail = Cocktail.new(cocktail_params)
+    cocktail = @current_user.cocktails.new(cocktail_params)
     if cocktail.save
       render json: cocktail
     else
@@ -37,7 +36,7 @@ class Api::CocktailsController < ApplicationController
     @cocktail = Cocktail.find(params[:id])
   end
   def cocktail_params
-    params.require(:cocktail).permit(:name, :served, :garnish, :drinkware, :ingredients, :instructions, :image, :timing)
+    params.require(:cocktail).permit(:name, :served, :garnish, :drinkware, :ingredients, :instructions, :image, :timing, :user_id)
   end
   
 end

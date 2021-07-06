@@ -1,72 +1,76 @@
 import Axios from "axios";
 import { useContext, useState } from "react";
-import { Header, Container, Form} from "semantic-ui-react";
+import { Header, Container, Form } from "semantic-ui-react";
+import { AuthContext } from "../providers/AuthProvider";
 import { CocktailContext } from "../providers/CocktailProvider";
 
-export default ({cocktailProp, addCocktail, editCocktail, handleClose}) => {
-  
-  const {handleCocktailEdit} = useContext(CocktailContext);
+export default ({ cocktailProp, addCocktail, editCocktail, history }) => {
+  const { handleCocktailEdit, handleCocktailCreate } = useContext(
+    CocktailContext
+  );
   //setting cocktail to a default value
-  
-
+  const { user } = useContext(AuthContext);
   const [cocktail, setCocktail] = useState(
-    cocktailProp ? {
-      name: cocktailProp.name,
-      served: cocktailProp.served,
-      garnish: cocktailProp.garnish,
-      drinkware: cocktailProp.drinkware,
-      ingredients: cocktailProp.ingredients,
-      instructions: cocktailProp.instructions,
-      image: cocktailProp.image,
-      timing: cocktailProp.timing,
-    } :
-    {
-      name: '',
-      served: '',
-      garnish: '',
-      drinkware: '',
-      ingredients: '',
-      instructions: '',
-      image: '',
-      timing: '',
-    }
-  )
+    cocktailProp
+      ? {
+          name: cocktailProp.name,
+          served: cocktailProp.served,
+          garnish: cocktailProp.garnish,
+          drinkware: cocktailProp.drinkware,
+          ingredients: cocktailProp.ingredients,
+          instructions: cocktailProp.instructions,
+          image: cocktailProp.image,
+          timing: cocktailProp.timing,
+          user_id: user.id,
+        }
+      : {
+          name: "",
+          served: "",
+          garnish: "",
+          drinkware: "",
+          ingredients: "",
+          instructions: "",
+          image: "",
+          timing: "",
+          user_id: user.id,
+        }
+  );
 
-  const addCallCocktail = async () =>{
-   try{
-     let res = await Axios.post(`/api/cocktails`, cocktail);
-     addCocktail(res.data);
-   }catch(err){
-     console.log(err);
-   }
-  }
+  const addCallCocktail = () => {
+    // try {
+    //   let res = await Axios.post(`/api/cocktails`, cocktail);
+    //   addCocktail(res.data);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    handleCocktailCreate(cocktail, history);
+  };
 
   const editCallCocktail = () => {
-    handleCocktailEdit(cocktailProp.id, cocktail);
-  }
+    handleCocktailEdit(cocktailProp.id, cocktail, history);
+  };
 
-  const handleChange = (e) =>{
-    setCocktail({...cocktail, [e.target.name]: e.target.value});
-  }
+  const handleChange = (e) => {
+    setCocktail({ ...cocktail, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(cocktailProp){
+    if (cocktailProp) {
       editCallCocktail();
-    }else{
+    } else {
       addCallCocktail();
       setCocktail({
-        name: '',
-        served: '',
-        garnish: '',
-        drinkware: '',
-        ingredients: '',
-        image: '',
-        timing: '',
-        
+        name: "",
+        served: "",
+        garnish: "",
+        drinkware: "",
+        ingredients: "",
+        instructions: "",
+        image: "",
+        timing: "",
       });
     }
-    handleClose();
   };
 
   return (
@@ -137,7 +141,9 @@ export default ({cocktailProp, addCocktail, editCocktail, handleClose}) => {
             value={cocktail.timing}
             onChange={handleChange}
           />
-          <Form.Button type="submit">{cocktailProp ? 'edit' : 'add'}</Form.Button>
+          <Form.Button type="submit">
+            {cocktailProp ? "edit" : "add"}
+          </Form.Button>
         </Form>
       </Container>
     </>

@@ -9,7 +9,6 @@ class CreateCocktails < ActiveRecord::Migration[6.0]
       t.text :instructions
       t.string :image
       t.string :timing
-
       t.timestamps
     end
   end
