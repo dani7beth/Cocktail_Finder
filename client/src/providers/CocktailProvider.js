@@ -21,7 +21,7 @@ export class CocktailProvider extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
   componentDidMount = () => {
     this.getCocktails();
   };
@@ -41,11 +41,12 @@ export class CocktailProvider extends React.Component {
     Axios.post("/api/cocktails", cocktail)
       .then((res) => {
         console.log(res.data);
-        history.goBack();
+        this.setState({ cocktails: [res.data, ...this.state.cocktails] });
       })
       .catch((err) => {
         console.log(err);
       });
+    history.goBack();
   };
   handleCocktailEdit = async (id, cocktail, history) => {
     try {
@@ -59,11 +60,19 @@ export class CocktailProvider extends React.Component {
   handleCocktailDelete = async (id, history) => {
     try {
       let res = await Axios.delete(`/api/cocktails/${id}`);
+      history.push("/cocktails");
+      let newCocktails = this.state.cocktails.filter(
+        (cocktail) => id !== cocktail.id
+      );
+      this.setState({ cocktails: newCocktails });
+      // this.setState({
+      //   cocktails: this.state.cocktails.filter(
+      //     (cocktail) => cocktail.id !== id
+      //   ),
+      // });
     } catch (err) {
       console.log(err);
     }
-    this.state.cocktails.filter((cocktail) => id !== cocktail.id);
-    history.goBack();
   };
   render() {
     return (
