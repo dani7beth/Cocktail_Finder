@@ -13,7 +13,7 @@ export class CocktailProvider extends React.Component {
     handleCocktailEdit: (x, y) => this.handleCocktailEdit(x, y),
   };
 
-  componentDidMount = () => {
+  getCocktails = () => {
     Axios.get("/api/cocktails")
       .then((res) => {
         this.setState({ cocktails: res.data });
@@ -21,6 +21,9 @@ export class CocktailProvider extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+  }
+  componentDidMount = () => {
+    this.getCocktails();
   };
 
   //handle search query
@@ -51,7 +54,7 @@ export class CocktailProvider extends React.Component {
     } catch (err) {
       console.log(err);
     }
-    history.goBack();
+    history.push("/");
   };
   handleCocktailDelete = async (id, history) => {
     try {
@@ -72,6 +75,7 @@ export class CocktailProvider extends React.Component {
           handleCocktailEdit: this.handleCocktailEdit,
           handleCocktailCreate: this.handleCocktailCreate,
         }}
+        key={this.state.cocktails}
       >
         {this.props.children}
       </CocktailContext.Provider>

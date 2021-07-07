@@ -57,6 +57,17 @@ const Cocktail = (props) => {
       ));
     }
   };
+  const renderButtons = () => {
+    if(user && (user.id === cocktail.user_id)){
+    return(      
+    <>
+      <Button onClick={handleShow}>Edit</Button>
+      <Button onClick={handleDelete}>Delete</Button>
+    </>
+    )
+    
+    }
+  }
 
   const handleRate = (e, { rating }) => {
     setRating(rating);
@@ -89,12 +100,7 @@ const Cocktail = (props) => {
         </List>
         <Header as="h4">Directions</Header>
         <p>{cocktail.instructions}</p>
-        {user.id === cocktail.user_id && (
-          <>
-            <Button onClick={handleShow}>Edit</Button>
-            <Button onClick={handleDelete}>Delete</Button>
-          </>
-        )}
+        {renderButtons()}
 
         <Modal
           show={show}
