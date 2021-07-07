@@ -26,6 +26,7 @@ const Cocktail = (props) => {
   const { user } = useContext(AuthContext);
   const handleShow = () => setShow(true);
   const handleHide = () => setShow(false);
+  const [average, setAverage] = useState(0);
 
   let cocktail = cocktails.find((c) => {
     return c.id == props.match.params.id;
@@ -35,12 +36,18 @@ const Cocktail = (props) => {
     Axios.get(`/api/cocktails/${props.match.params.id}/reviews`)
       .then((res) => {
         setReviews(res.data);
+        let ratingTotals = 0;
+        let count = 0;
+        res.data.forEach((review) => {
+          ratingTotals += review.rating;
+          count += 1;
+        });
+        setAverage(ratingTotals / count);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   useEffect(() => {
     getReviews();
   }, []);
@@ -120,13 +127,18 @@ const Cocktail = (props) => {
         </Modal>
 
         <Header as="h4">Reviews</Header>
-        <Rating
-          icon="star"
-          defaultRating={1}
-          maxRating={5}
-          size="huge"
-          onRate={handleRate}
-        />
+        <div>
+          {average && (
+            <Rating
+              icon="star"
+              defaultRating={average}
+              maxRating={5}
+              size="huge"
+              onRate={handleRate}
+            />
+          )}
+          <p>{average.toFixed(2)}</p>
+        </div>
         <Form onSubmit={handleSubmit}>
           <Form.Input
             label="Comment"
