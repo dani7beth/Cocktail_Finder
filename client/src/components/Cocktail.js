@@ -31,7 +31,6 @@ const Cocktail = (props) => {
   let cocktail = cocktails.find((c) => {
     return c.id == props.match.params.id;
   });
-
   const getReviews = () => {
     Axios.get(`/api/cocktails/${props.match.params.id}/reviews`)
       .then((res) => {
@@ -42,7 +41,7 @@ const Cocktail = (props) => {
           ratingTotals += review.rating;
           count += 1;
         });
-        setAverage(ratingTotals / count);
+        ratingTotals === NaN ? setAverage(0) : setAverage(ratingTotals / count);
       })
       .catch((err) => {
         console.log(err);
@@ -52,6 +51,7 @@ const Cocktail = (props) => {
     getReviews();
   }, []);
 
+  console.log(average);
   const renderReviews = () => {
     if (reviews !== null) {
       return reviews.map((r) => (
@@ -75,9 +75,16 @@ const Cocktail = (props) => {
     }
   };
 
+  const renderAverage = () => {
+    if (isNaN(parseFloat(average))) {
+      return;
+    } else {
+      return <p>{average}</p>;
+    }
+  };
+
   const handleRate = (e, { rating }) => {
     setRating(rating);
-    // console.log(rating);
   };
 
   const handleSubmit = (e) => {
@@ -128,7 +135,7 @@ const Cocktail = (props) => {
 
         <Header as="h4">Reviews</Header>
         <div>
-          {average && (
+          {user && (
             <Rating
               icon="star"
               defaultRating={average}
@@ -137,20 +144,22 @@ const Cocktail = (props) => {
               onRate={handleRate}
             />
           )}
-          <p>{average.toFixed(2)}</p>
+          {user && renderAverage()}
         </div>
-        <Form onSubmit={handleSubmit}>
-          <Form.Input
-            label="Comment"
-            type="text"
-            name="comment"
-            value={comment}
-            onChange={(e, { value }) => {
-              setComment(value);
-            }}
-          />
-          <Form.Button type="submit">submit</Form.Button>
-        </Form>
+        {user && (
+          <Form onSubmit={handleSubmit}>
+            <Form.Input
+              label="Comment"
+              type="text"
+              name="comment"
+              value={comment}
+              onChange={(e, { value }) => {
+                setComment(value);
+              }}
+            />
+            <Form.Button type="submit">submit</Form.Button>
+          </Form>
+        )}
         {renderReviews()}
       </Container>
     </>

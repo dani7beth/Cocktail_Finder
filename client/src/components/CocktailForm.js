@@ -3,6 +3,8 @@ import { useContext, useState } from "react";
 import { Header, Container, Form } from "semantic-ui-react";
 import { AuthContext } from "../providers/AuthProvider";
 import { CocktailContext } from "../providers/CocktailProvider";
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
 
 export default ({ cocktailProp, addCocktail, editCocktail, history }) => {
   const { handleCocktailEdit, handleCocktailCreate } = useContext(
@@ -10,6 +12,14 @@ export default ({ cocktailProp, addCocktail, editCocktail, history }) => {
   );
   //setting cocktail to a default value
   const { user } = useContext(AuthContext);
+  const [files, setFiles] = useState();
+  const [name, setName] = useState("");
+  const [served, setServed] = useState("");
+  const [garnish, setGarnish] = useState("");
+  const [drinkware, setDrinkware] = useState("");
+  const [ingredients, setIngredients] = useState("");
+  const [instructions, setInstructions] = useState("");
+  const [timing, setTiming] = useState("");
   const [cocktail, setCocktail] = useState(
     cocktailProp
       ? {
@@ -37,23 +47,34 @@ export default ({ cocktailProp, addCocktail, editCocktail, history }) => {
   );
 
   const addCallCocktail = () => {
-    // try {
-    //   let res = await Axios.post(`/api/cocktails`, cocktail);
-    //   addCocktail(res.data);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    handleCocktailCreate(cocktail, history);
+    let data = new FormData();
+    data.append("name", cocktail.name);
+    data.append("served", cocktail.served);
+    data.append("garnish", cocktail.garnish);
+    data.append("drinkware", cocktail.drinkware);
+    data.append("ingredients", cocktail.ingredients);
+    data.append("instructions", cocktail.instructions);
+    data.append("image", cocktail.image);
+    data.append("timing", cocktail.timing);
+    handleCocktailCreate(data, history);
   };
-
+  const handleChange = (e) => {
+    setCocktail({ ...cocktail, [e.target.name]: e.target.value });
+  };
+  const handleUpdate = (fileItems) => {
+    console.log(cocktail);
+    if (fileItems.length !== 0) {
+      setFiles(fileItems);
+      setCocktail({ ...cocktail, image: fileItems[0].file });
+    }
+  };
   const editCallCocktail = () => {
     handleCocktailEdit(cocktailProp.id, cocktail, history);
   };
 
-  const handleChange = (e) => {
-    setCocktail({ ...cocktail, [e.target.name]: e.target.value });
+  const handleFileRemoved = (e, file) => {
+    setFiles(null);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (cocktailProp) {
@@ -61,14 +82,14 @@ export default ({ cocktailProp, addCocktail, editCocktail, history }) => {
     } else {
       addCallCocktail();
       setCocktail({
-        name: "",
-        served: "",
-        garnish: "",
-        drinkware: "",
-        ingredients: "",
-        instructions: "",
+        name: name,
+        served: served,
+        garnish: garnish,
+        drinkware: drinkware,
+        ingredients: ingredients,
+        instructions: instructions,
         image: "",
-        timing: "",
+        timing: timing,
       });
     }
   };
@@ -84,62 +105,63 @@ export default ({ cocktailProp, addCocktail, editCocktail, history }) => {
             label="Name"
             type="text"
             name="name"
-            value={cocktail.name}
-            onChange={handleChange}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
           <Form.Input
             label="Served"
             type="text"
             name="served"
-            value={cocktail.served}
-            onChange={handleChange}
+            value={served}
+            onChange={(e) => setServed(e.target.value)}
             required
           />
           <Form.Input
             label="Garnish"
             type="text"
             name="garnish"
-            value={cocktail.garnish}
-            onChange={handleChange}
+            value={garnish}
+            onChange={(e) => setGarnish(e.target.value)}
           />
           <Form.Input
             label="Drinkware"
             type="text"
             name="drinkware"
-            value={cocktail.drinkware}
-            onChange={handleChange}
+            value={drinkware}
+            onChange={(e) => setDrinkware(e.target.value)}
             required
           />
           <Form.Input
             label="Ingredients"
             type="text"
             name="ingredients"
-            value={cocktail.ingredients}
-            onChange={handleChange}
+            value={ingredients}
+            onChange={(e) => setIngredients(e.target.value)}
             required
           />
           <Form.Input
             label="Instructions"
             type="text"
             name="instructions"
-            value={cocktail.instructions}
-            onChange={handleChange}
+            value={instructions}
+            onChange={(e) => setInstructions(e.target.value)}
             required
           />
-          <Form.Input
-            label="Image Url"
-            type="text"
+          <FilePond
+            files={files}
+            onupdatefiles={handleUpdate}
+            onremovefile={handleFileRemoved}
+            allowMultiple={false}
             name="image"
-            value={cocktail.image}
-            onChange={handleChange}
+            labelIdle='Drag and Drop your files or <span class="filepond--label-action">Browse</span>'
           />
           <Form.Input
             label="Timing"
             type="text"
             name="timing"
-            value={cocktail.timing}
-            onChange={handleChange}
+            value={timing}
+            onChange={(e) => setTiming(e.target.value)}
           />
           <Form.Button type="submit">
             {cocktailProp ? "edit" : "add"}
