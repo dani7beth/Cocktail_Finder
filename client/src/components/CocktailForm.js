@@ -34,28 +34,29 @@ export default ({ cocktailProp, addCocktail, editCocktail, history }) => {
           user_id: user.id,
         }
       : {
-          name: "",
-          served: "",
-          garnish: "",
-          drinkware: "",
-          ingredients: "",
-          instructions: "",
+          name: name,
+          served: served,
+          garnish: garnish,
+          drinkware: drinkware,
+          ingredients: ingredients,
+          instructions: instructions,
           image: "",
-          timing: "",
+          timing: timing,
           user_id: user.id,
         }
   );
 
   const addCallCocktail = () => {
     let data = new FormData();
-    data.append("name", cocktail.name);
-    data.append("served", cocktail.served);
-    data.append("garnish", cocktail.garnish);
-    data.append("drinkware", cocktail.drinkware);
-    data.append("ingredients", cocktail.ingredients);
-    data.append("instructions", cocktail.instructions);
+    data.append("name", name);
+    data.append("served", served);
+    data.append("garnish", garnish);
+    data.append("drinkware", drinkware);
+    data.append("ingredients", ingredients);
+    data.append("instructions", instructions);
     data.append("image", cocktail.image);
-    data.append("timing", cocktail.timing);
+    data.append("timing", timing);
+    data.append("user_id", user.id);
     handleCocktailCreate(data, history);
   };
   const handleChange = (e) => {
@@ -90,6 +91,7 @@ export default ({ cocktailProp, addCocktail, editCocktail, history }) => {
         instructions: instructions,
         image: "",
         timing: timing,
+        user_id: user.id,
       });
     }
   };
